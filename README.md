@@ -1,13 +1,6 @@
-# React-TODO
-Todo App Written in React.js
+# React Basics Repo
+> This repo contains basic react project(s) to help you get started with React.
 
-**Step 1**: Create a new React App
-```
-npm create vite
-```
-
-**Step 2**: Install and start app
-```
-npm install
-npm run dev
-```
+## Setup
+- Initalize a new React app with `npx create-react-app (project-name))`
+- Start the app with `npm start` (after cd'ing into the project directory)
