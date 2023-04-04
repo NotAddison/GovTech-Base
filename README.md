@@ -3,11 +3,11 @@ Todo App Written in React.js
 
 **Step 1**: Create a new React App
 ```
-npx create-react-app react-todo
+npm create vite
 ```
 
-**Step 2**: Navigate to the project directory and start project
+**Step 2**: Install and start app
 ```
-cd react-todo
-npm start
+npm install
+npm run dev
 ```
