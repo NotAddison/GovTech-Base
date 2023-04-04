@@ -1,7 +1,11 @@
-import './App.css';
-import './index.css';
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+import {CustomButton} from './components/custombutton';
+
+
+// -- CSS FILES -- 
+import './App.css';
+import './index.css';
 
 const user = {
   name: 'Addison Chua',
@@ -102,8 +106,8 @@ function HttpReq(){
 
   return (
     <div>
-      <button onClick={handleButtonClick}>Get Data</button> 
-      <button onClick={clearData}>Clear Data</button>
+      <CustomButton value={"get"} onClick={handleButtonClick}>Get Data</CustomButton>
+      <CustomButton onClick={clearData}>Clear Data</CustomButton>
       <br /><br />
       <code>{JSON.stringify(data)}</code>
     </div>
