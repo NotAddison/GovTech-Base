@@ -5,6 +5,8 @@ import { InjectModel } from '@nestjs/mongoose';
 import { User, UserDocument } from 'src/schemas/user.schema';
 import { Model } from 'mongoose';
 
+// NOTE: Should implement Error Handling, this is simplified for understanding
+
 @Injectable()
 export class UserService {
 
@@ -17,19 +19,24 @@ export class UserService {
     return new this.userModel(createUserDto).save();
   }
 
-  findAll() {
-    return `This action returns all user`;
+  async findAll(){
+    // Return all data
+    return this.userModel.find();
   }
 
-  findOne(id: number) {
-    return `This action returns a #${id} user`;
+  async findOne(name: string) : Promise<User> {
+    // Return one data
+    console.log("findOne: ", name)
+    return this.userModel.findOne({name: name});
   }
 
-  update(id: number, updateUserDto: UpdateUserDto) {
-    return `This action updates a #${id} user`;
+  async update(name: string, updateUserDto: UpdateUserDto){
+    // Update data
+    return this.userModel.updateOne({name: name}, {$set : updateUserDto});
   }
 
-  remove(id: number) {
-    return `This action removes a #${id} user`;
+  async remove(name: string) {
+    // Delete data
+    return this.userModel.findOneAndRemove({name: name});
   }
 }

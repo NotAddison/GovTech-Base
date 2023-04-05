@@ -19,3 +19,4 @@
 - Create a controller --> `nest g co (controller-name)`
 - Create a Resource --> `nest g res (resource-name)` || `nest g resource`
 - NOTE: If connection to localhost does not work, use `127.0.0.1` instead.
+- NOTE: JSON -> Mapped to Scheme (Class) using constructor -> Appened to DB
