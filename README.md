@@ -10,3 +10,12 @@
 - Initalize a new NestJS app with `nest new (project-name)`
 - Shortcut (to create a new controller): nest g controller (controller-name) 
 - Run nest app with `npm run start:dev` (runs on http://localhost:3000/)
+
+
+#### MongoDB
+- Install MongoDB NestJS Wrapper `npm install --save mongoose @nestjs/mongoose`
+- Import the module in the `app.module.ts` file in the imports array
+- Create a schema --> `nest g mo (model-name)`
+- Create a controller --> `nest g co (controller-name)`
+- Create a Resource --> `nest g res (resource-name)` || `nest g resource`
+- NOTE: If connection to localhost does not work, use `127.0.0.1` instead.

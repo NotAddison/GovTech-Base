@@ -1,14 +1,14 @@
 import { Module } from '@nestjs/common';
 import { AppController } from './app.controller';
 import { AppService } from './app.service';
-import { ReadController } from './read/read.controller';
-import { CreateController } from './create/create.controller';
-import { UpdateController } from './update/update.controller';
-import { DeleteController } from './delete/delete.controller';
+
+// NESTJS Mongoose
+import { MongooseModule } from '@nestjs/mongoose';
+import { UserModule } from './user/user.module';
 
 @Module({
-  imports: [],
-  controllers: [AppController, ReadController, CreateController, UpdateController, DeleteController],
+  imports: [MongooseModule.forRoot('mongodb://127.0.0.1/nest'), UserModule],
+  controllers: [AppController],
   providers: [AppService],
 })
 export class AppModule {}
