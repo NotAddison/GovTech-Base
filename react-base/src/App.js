@@ -1,6 +1,11 @@
 import { useState, useEffect } from 'react';
 import axios from 'axios';
+
+
+// -- COMPONENTS --
 import {CustomButton} from './components/custombutton';
+import {CustomLabel} from './components/customlabel';
+import { CustomInput } from './components/custominput';
 
 
 // -- CSS FILES -- 
@@ -31,7 +36,10 @@ function App() {
         {/* HTTP Reqs */}
         {/* Uses Axios Lib*/}
         <HttpReq />
+        <br /><br /><br /><br /><br /><br />
 
+        {/* -- CRUD -- */}
+        <CRUD />
     </div>
   );
 }
@@ -55,6 +63,7 @@ function DataParam(param){
     <div><p><b>Param text: </b>{param.text}</p></div>
   )
 }
+
 
 function InvertCondition({ condition, onClick }) {
   return (
@@ -114,5 +123,128 @@ function HttpReq(){
   );
 }
 
+function CRUD(){
+
+  const [name, setName] = useState("");
+  const [age, setAge] = useState("");
+  const [message, setMessage] = useState("");
+  const [response, setResponse] = useState("");
+
+  // -- [ (C) Submit Button Function ] --
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    console.log(name, age, message);
+    if (name === "") { alert("Please enter a name"); return; };
+
+    var url = "http://localhost:3000/user/";
+
+    // Create JSON object
+    const data = {
+      name: name,
+      age: age,
+      message: message
+    }
+
+    // POST data
+    axios.post(url, data)
+      .then((response) => {
+        console.log(response);
+        setResponse(response.data);
+      }
+    );
+
+    // Clear form
+    setName("");
+    setAge("");
+    setMessage("");
+  }
+
+  // -- [ (R) Read Button Function ] --
+  const handleRead = (event) => {
+    event.preventDefault();
+    var url = "http://localhost:3000/user/";
+    if (name != "") url = url + name;
+
+    axios.get(url)
+      .then((response) => {
+        console.log(response);
+        setResponse(response.data);
+      }
+    );
+  }
+
+  // -- [ (U) Update Button Function ] --
+  const handleUpdate = (event) => {
+    event.preventDefault();
+    var url = "http://localhost:3000/user/";
+    if (name != "") url = url + name;
+
+    const obj = {
+      name: name,
+      age: age,
+      message: message
+    }
+    
+    axios.patch(url, obj)
+      .then((response) => {
+        console.log(response);
+        setResponse(response.data);
+      });
+  }
+
+  // -- [ (D) Delete Button Function ] --
+  const handleDelete = (event) => {
+    event.preventDefault();
+    var url = "http://localhost:3000/user/";
+    if (name === "") { alert("Please enter a name"); return; };
+    
+    url = url + name;
+    axios.delete(url)
+      .then((response) => {
+        console.log(response);
+        setResponse(response.data);
+    });
+  }
+    
+
+
+  return (
+    <div className='container'>
+      <div className='left'>
+        <form>
+          <div className="form-input">
+            <CustomLabel type="text" name="name"> Name: </CustomLabel>
+            <CustomInput type="text" name="name" onChange={(e) => setName(e.target.value)}/>
+          </div>
+
+          <div className="form-input">
+            <CustomLabel type="text" name="age"> Age: </CustomLabel>
+            <CustomInput type="text" name="age" onChange={(e) => setAge(e.target.value)}/>
+          </div>
+
+          <div className="form-input">
+            <CustomLabel type="text" name="message"> Message: </CustomLabel>
+            <CustomInput type="text" name="message" onChange={(e) => setMessage(e.target.value)}/>
+          </div>
+
+          {/* Submit form */}
+          <br/>
+          <div className='form-submit'>
+            <CustomButton onClick={handleSubmit}>Create</CustomButton>
+            <CustomButton onClick={handleRead}>Read</CustomButton>
+            <CustomButton onClick={handleUpdate}>Update</CustomButton>
+            <CustomButton onClick={handleDelete}>Delete</CustomButton>
+          </div>
+        </form>
+      </div>
+      <div className='right'>
+        <p>Response:</p>
+        <code>
+          {JSON.stringify(response)}
+        </code>
+      </div>
+    </div>
+  )
+  }
 
 export default App;

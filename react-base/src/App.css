@@ -26,3 +26,26 @@ button:hover{
   color: black;
   cursor: pointer;
 }
+
+.form-input{
+  margin-bottom: 5px;
+}
+
+.form-submit{
+  display: flex;
+  justify-content: space-around;
+}
+
+/* ------------------ */
+.container{
+  display: flex;
+  justify-content: flex-start;
+  flex-wrap: wrap;
+}
+
+.left{
+  background-color: #19191a;
+  margin-right: 50px;
+  padding: 30px;
+  border-radius: 10px;
+}
